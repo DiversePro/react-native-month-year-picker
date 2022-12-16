@@ -10,6 +10,7 @@ import {
   ACTION_NEUTRAL,
   NATIVE_FORMAT,
   DEFAULT_MODE,
+  DATE_CHANGED,
 } from './constants';
 
 const { width } = Dimensions.get('screen');
@@ -56,8 +57,9 @@ const MonthPicker = ({
   }, []);
 
   const onChange = useCallback(
-    ({ nativeEvent: { newDate } }) =>
-      setSelectedDate(moment(newDate, NATIVE_FORMAT).toDate()),
+    ({ nativeEvent: { newDate } }) =>{
+      setSelectedDate(moment(newDate, NATIVE_FORMAT).toDate())
+      onAction && onAction(DATE_CHANGED, moment(newDate, NATIVE_FORMAT).toDate())},
     [],
   );
 
